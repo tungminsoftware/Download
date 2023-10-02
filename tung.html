@@ -1,0 +1,1068 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+    <title>Tool PRO MAX</title>
+</head>
+
+<body>
+    <div class="">
+        <h1 class="pt-2 text-center">Công cụ xử lý PRO MAX</h1>
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                    aria-selected="true">Cắt chuỗi</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                    aria-controls="profile" aria-selected="false">Ghép chuỗi 1</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                    aria-controls="contact" aria-selected="false">Ghép chuỗi 2</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="thayTheChuoi-tab" data-toggle="tab" href="#thayTheChuoi" role="tab"
+                    aria-controls="thayTheChuoi" aria-selected="false">Thay thế chuỗi</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="loctrung-tab" data-toggle="tab" href="#loctrung" role="tab"
+                    aria-controls="loctrung" aria-selected="false">Lọc trùng</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="xulycontent-tab" data-toggle="tab" href="#xulycontent" role="tab"
+                    aria-controls="xulycontent" aria-selected="false">Xử lý content</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="testspin-tab" data-toggle="tab" href="#testspin" role="tab"
+                    aria-controls="testspin" aria-selected="false">Test Spin content</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tachTuKhoa-tab" data-toggle="tab" href="#tachTuKhoa" role="tab"
+                    aria-controls="tachTuKhoa" aria-selected="false">Tách cụm từ khóa</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="ghepNoiDung-tab" data-toggle="tab" href="#ghepNoiDung" role="tab"
+                    aria-controls="ghepNoiDung" aria-selected="false">Ghép nội dung 1</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="ghepNoiDung2-tab" data-toggle="tab" href="#ghepNoiDung2" role="tab"
+                    aria-controls="ghepNoiDung2" aria-selected="false">Ghép nội dung 2</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="layIdTuLink-tab" data-toggle="tab" href="#layIdTuLink" role="tab"
+                    aria-controls="layIdTuLink" aria-selected="false">Lấy Id Post Từ link Fb</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="loctheouid-tab" data-toggle="tab" href="#loctheouid" role="tab"
+                    aria-controls="loctheouid" aria-selected="false">Lọc danh sách tài khoản theo uid</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <form
+                    class="pt-3 form-horizontal ng-dirty ng-valid-parse ng-valid-number ng-valid-min ng-invalid ng-invalid-required"
+                    role="form" method="post" name="cms_form2" novalidate="">
+                    <div class="form-group">
+                        <label class="col-sm-12 control-label mb-0">Loại bỏ trùng lặp:
+                            <input type="checkbox" ng-model="cms_form_data.object.is_duplicate" checked=""
+                                ng-true-value="1" class="ng-pristine ng-untouched ng-valid ng-not-empty"
+                                id="isLoaiTrungLap1" />
+                            <span class=""> Đúng</span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">Nội dung:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 120px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-touched ng-dirty ng-valid-parse ng-empty ng-invalid ng-invalid-required"
+                                ng-required="true" ng-model="cms_form_data.object.cut_input" required="required"
+                                placeholder="noidung1|noidung2|noidung3" id="noidung1"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-12 control-label ">Ngăn cách bởi ký tự:</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" ng-trim="false"
+                                ng-model="cms_form_data.object.cut_seperate" value="|" id="ngancach1" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">Bắt đầu cắt:</label>
+                        <div class="col-sm-12">
+                            <input type="number" min="1"
+                                class="form-control ng-valid ng-not-empty ng-valid-min ng-valid-required ng-dirty ng-valid-number ng-touched"
+                                ng-required="true" ng-model="cms_form_data.object.cut_start" required="required"
+                                value="1" id="batdau1" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">Đến cụm:</label>
+                        <div class="col-sm-12">
+                            <input type="number" min="1"
+                                class="form-control ng-not-empty ng-valid-required ng-dirty ng-valid-number ng-touched ng-valid ng-valid-min"
+                                ng-required="true" ng-model="cms_form_data.object.cut_end" required="required" value="1"
+                                id="dencum1" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <span ng-click="cms_form2.$invalid || cut_text()" ng-disabled="cms_form2.$invalid"
+                                class="btn btn-warning btn_control_box btn-block " disabled="disabled"
+                                onclick="catchuoi()">Bắt đầu cắt</span>
+                        </div>
+                    </div>
+                    <!-- ngIf: cms_form_data.object.cut_output -->
+                    <div class="form-group ng-scope" ng-if="cms_form_data.object.cut_output">
+                        <label class="col-sm-2 control-label ">Kết quả:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 120px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-pristine ng-valid ng-not-empty ng-valid-required ng-touched"
+                                ng-required="true" ng-model="cms_form_data.object.cut_output" required="required"
+                                id="ketqua1"></textarea>
+                        </div>
+                    </div>
+                    <!-- end ngIf: cms_form_data.object.cut_output -->
+                </form>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <form class="pt-3 form-horizontal ng-pristine ng-valid ng-valid-required" role="form" method="post"
+                    name="cms_form3" novalidate="">
+                    <div class="form-group">
+                        <label class="col-sm-12 control-label mb-0">Loại bỏ trùng lặp:
+                            <input type="checkbox" ng-model="cms_form_data.object.is_duplicate" ng-true-value="1"
+                                class="ng-pristine ng-untouched ng-valid ng-not-empty" checked=""
+                                id="isLoaiTrungLap2" />
+                            <span class=""> Đúng</span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label ">Nội dung:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 150px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-pristine ng-valid ng-not-empty ng-valid-required ng-touched"
+                                ng-required="true" ng-model="cms_form_data.object.merge_input" required="required"
+                                placeholder="noidung1|noidung2|noidung3" id="noidung2"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label ">Chuỗi ghép vào đầu dòng:</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" ng-trim="false"
+                                ng-model="cms_form_data.object.merge_start_text" placeholder="START|" id="ghepdau2" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label ">Chuỗi ghép vào cuối dòng:</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" ng-trim="false"
+                                ng-model="cms_form_data.object.merge_end_text" placeholder="|END" id="ghepcuoi2" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <span ng-click="cms_form3.$invalid || merge_text()" ng-disabled="cms_form3.$invalid"
+                                class="btn btn-warning btn_control_box btn-block " onclick="ghepchuoi()">Bắt
+                                đầu ghép</span>
+                        </div>
+                    </div>
+                    <div class="form-group ng-scope" ng-if="cms_form_data.object.merge_output">
+                        <label class="col-sm-2 control-label ">Kết quả:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 150px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-pristine ng-valid ng-not-empty ng-valid-required ng-touched"
+                                ng-required="true" ng-model="cms_form_data.object.merge_output" required="required"
+                                id="ketqua2"></textarea>
+                        </div>
+                    </div>
+                    <!-- ngIf: cms_form_data.object.merge_output -->
+                </form>
+            </div>
+            <div class="tab-pane fade" id="thayTheChuoi" role="tabpanel" aria-labelledby="thayTheChuoi-tab">
+                <form class="pt-3 form-horizontal ng-pristine ng-valid ng-valid-required" role="form" method="post"
+                    name="cms_form3" novalidate="">
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label ">Nội dung:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 200px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-pristine ng-valid ng-not-empty ng-valid-required ng-touched"
+                                required="required" placeholder="Nhập nội dung..." id="noidung9"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label ">Danh sách chuỗi cần thay:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 150px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-pristine ng-valid ng-not-empty ng-valid-required ng-touched"
+                                required="required" placeholder="Nhập danh sách chuỗi cần thay..."
+                                id="chuoiCanThay"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label ">Chuỗi dùng để thay:</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" placeholder="Nhập chuỗi dùng để thay..."
+                                id="chuoiThayThe" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <span ng-click="cms_form3.$invalid || merge_text()" ng-disabled="cms_form3.$invalid"
+                                class="btn btn-warning btn_control_box btn-block " onclick="thayTheChuoi()">Xử lý</span>
+                        </div>
+                    </div>
+                    <div class="form-group ng-scope" ng-if="cms_form_data.object.merge_output">
+                        <label class="col-sm-2 control-label ">Kết quả:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 150px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-not-empty ng-valid-required ng-touched" ng-required="true"
+                                ng-model="cms_form_data.object.merge_output" required="required"
+                                id="ketqua9"></textarea>
+                        </div>
+                    </div>
+                    <!-- ngIf: cms_form_data.object.merge_output -->
+                </form>
+            </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                <form class="pt-3 form-horizontal ng-pristine ng-valid ng-valid-required" role="form" method="post"
+                    name="cms_form12" novalidate="">
+                    <div class="form-group">
+                        <label class="col-sm-12 control-label mb-0">Loại bỏ trùng lặp:
+                            <input type="checkbox" ng-model="cms_form_data.object.is_duplicate" ng-true-value="1"
+                                class="ng-pristine ng-untouched ng-valid ng-not-empty" checked=""
+                                id="isLoaiTrungLap3" />
+                            <span class=""> Đúng</span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">Nội dung 1:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 120px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" ng-required="true"
+                                ng-model="cms_form_data.object.filter_merge_file_input1" required="required"
+                                placeholder="Nhập nội dung 1..." id="noidung31"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">Nội dung 2:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 120px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" ng-required="true"
+                                ng-model="cms_form_data.object.filter_merge_file_input2" required="required"
+                                placeholder="Nhập nội dung 2..." id="noidung32"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label ">Nội dung ngăn cách 2 dòng:</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" ng-trim="false"
+                                ng-model="cms_form_data.object.filter_merge_file_seperate_text"
+                                placeholder="Nhập nội dung ngăn cách..." id="ngancach3" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <span ng-click="cms_form12.$invalid || filter_merge_file()"
+                                ng-disabled="cms_form12.$invalid" class="btn btn-warning btn_control_box btn-block "
+                                onclick="ghepfile()">Bắt
+                                đầu ghép</span>
+                        </div>
+                    </div>
+                    <!-- ngIf: cms_form_data.object.filter_merge_file_output -->
+                    <div class="form-group ng-scope" ng-if="cms_form_data.object.filter_merge_file_output">
+                        <label class="col-sm-2 control-label ">Kết quả:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 120px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" ng-required="true"
+                                ng-model="cms_form_data.object.filter_merge_file_output" required="required"
+                                id="ketqua3"></textarea>
+                        </div>
+                    </div>
+                    <!-- end ngIf: cms_form_data.object.filter_merge_file_output -->
+                </form>
+            </div>
+            <div class="tab-pane fade" id="loctrung" role="tabpanel" aria-labelledby="loctrung-tab">
+                <form class="pt-3 form-horizontal ng-pristine ng-valid ng-valid-required" role="form" method="post"
+                    name="cms_form12" novalidate="">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">Nội dung:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 150px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" ng-required="true"
+                                ng-model="cms_form_data.object.filter_merge_file_input1" required="required"
+                                placeholder="Nhập nội dung..." id="noidung4"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">Tùy chọn:</label>
+
+                        <div class="form-check-inline pl-3">
+                            <label class="form-check-label">
+                                <input type="radio" checked class="form-check-input" name="typeLocTrung" value="0">Xuất
+                                danh sách đã lọc trùng
+                            </label>
+                        </div>
+                        <div class="form-check-inline pl-3">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="typeLocTrung" value="1">Xuất danh
+                                sách trùng
+                            </label>
+                        </div>
+                        <div class="form-check-inline pl-3">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="typeLocTrung" value="2">Xuất danh
+                                sách không trùng
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <span ng-click="cms_form12.$invalid || filter_merge_file()"
+                                ng-disabled="cms_form12.$invalid" class="btn btn-warning btn_control_box btn-block "
+                                onclick="loctrungchuoi()">Lọc trùng</span>
+                        </div>
+                    </div>
+                    <!-- ngIf: cms_form_data.object.filter_merge_file_output -->
+                    <div class="form-group ng-scope" ng-if="cms_form_data.object.filter_merge_file_output">
+                        <label class="col-sm-2 control-label " id="status4">Kết quả:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 150px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" ng-required="true"
+                                ng-model="cms_form_data.object.filter_merge_file_output" required="required"
+                                id="ketqua4"></textarea>
+                        </div>
+                    </div>
+                    <!-- end ngIf: cms_form_data.object.filter_merge_file_output -->
+                </form>
+            </div>
+            <div class="tab-pane fade" id="xulycontent" role="tabpanel">
+                <form class="pt-3 form-horizontal ng-pristine ng-valid ng-valid-required" role="form" method="post"
+                    name="cms_form12" novalidate="">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">Nội dung:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 200px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" required="required"
+                                placeholder="Nhập nội dung..." id="noidung5"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">Từ khóa:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 200px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" required="required" placeholder="Nhập từ khóa..."
+                                id="tukhoa5"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <span class="btn btn-warning btn_control_box btn-block " onclick="xuLyContent()">Xử
+                                lý</span>
+                        </div>
+                    </div>
+                    <!-- ngIf: cms_form_data.object.filter_merge_file_output -->
+                    <div class="form-group ng-scope">
+                        <label class="col-sm-2 control-label ">Kết quả:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 200px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" required="required" id="ketqua5"></textarea>
+                        </div>
+                    </div>
+                    <!-- end ngIf: cms_form_data.object.filter_merge_file_output -->
+                </form>
+            </div>
+            <div class="tab-pane fade" id="testspin" role="tabpanel">
+                <form class="pt-3 form-horizontal ng-pristine ng-valid ng-valid-required" role="form" method="post"
+                    name="cms_form12" novalidate="">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">Nội dung:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 250px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" required="required"
+                                placeholder="Nhập nội dung..." id="noidung6"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <span class="btn btn-warning btn_control_box btn-block " onclick="testSpin()">Xử
+                                lý</span>
+                        </div>
+                    </div>
+                    <!-- ngIf: cms_form_data.object.filter_merge_file_output -->
+                    <div class="form-group ng-scope">
+                        <label class="col-sm-2 control-label ">Kết quả:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 250px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" required="required" id="ketqua6"></textarea>
+                        </div>
+                    </div>
+                    <!-- end ngIf: cms_form_data.object.filter_merge_file_output -->
+                </form>
+            </div>
+            <div class="tab-pane fade" id="tachTuKhoa" role="tabpanel">
+                <form class="pt-3 form-horizontal ng-pristine ng-valid ng-valid-required" role="form" method="post"
+                    name="cms_form12" novalidate="">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">Nội dung:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 250px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" required="required"
+                                placeholder="Nhập nội dung..." id="noidung7"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <span class="btn btn-warning btn_control_box btn-block " onclick="tachTuKhoa()">Xử
+                                lý</span>
+                        </div>
+                    </div>
+                    <!-- ngIf: cms_form_data.object.filter_merge_file_output -->
+                    <div class="form-group ng-scope">
+                        <label class="col-sm-2 control-label ">Kết quả (<span id="countKetQua7">0</span>):</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 250px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" required="required" id="ketqua7"></textarea>
+                        </div>
+                    </div>
+                    <!-- end ngIf: cms_form_data.object.filter_merge_file_output -->
+                </form>
+            </div>
+            <div class="tab-pane fade" id="layIdTuLink" role="tabpanel">
+                <form class="pt-3 form-horizontal ng-pristine ng-valid ng-valid-required" role="form" method="post"
+                    name="cms_form12" novalidate="">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">Nội dung:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 250px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" required="required"
+                                placeholder="Nhập nội dung..." id="noidung10"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <span class="btn btn-warning btn_control_box btn-block " onclick="layIdTuLink()">Xử
+                                lý</span>
+                        </div>
+                    </div>
+                    <!-- ngIf: cms_form_data.object.filter_merge_file_output -->
+                    <div class="form-group ng-scope">
+                        <label class="col-sm-2 control-label ">Kết quả:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 250px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" required="required" id="ketqua10"></textarea>
+                        </div>
+                    </div>
+                    <!-- end ngIf: cms_form_data.object.filter_merge_file_output -->
+                </form>
+            </div>
+            <div class="tab-pane fade" id="ghepNoiDung" role="tabpanel" aria-labelledby="ghepNoiDung-tab">
+                <form class="pt-3 form-horizontal ng-pristine ng-valid ng-valid-required" role="form" method="post"
+                    name="cms_form12" novalidate="">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">Nội dung:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 150px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" ng-required="true"
+                                ng-model="cms_form_data.object.filter_merge_file_input1" required="required"
+                                placeholder="Nhập nội dung..." id="noidung8"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">Định dạng:</label>
+
+                        <div class="form-check-inline pl-3">
+                            <label class="form-check-label">
+                                <input type="radio" checked class="form-check-input" name="typeDinhDang"
+                                    value="0">@[{a|b|c}:]
+                            </label>
+                        </div>
+                        <div class="form-check-inline pl-3">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="typeDinhDang" value="1">{a|b|c}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <span class="btn btn-warning btn_control_box btn-block " onclick="ghepNoiDung()">Xử
+                                lý</span>
+                        </div>
+                    </div>
+                    <!-- ngIf: cms_form_data.object.filter_merge_file_output -->
+                    <div class="form-group ng-scope" ng-if="cms_form_data.object.filter_merge_file_output">
+                        <label class="col-sm-2 control-label " id="status4">Kết quả:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 150px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" ng-required="true"
+                                ng-model="cms_form_data.object.filter_merge_file_output" required="required"
+                                id="ketqua8"></textarea>
+                        </div>
+                    </div>
+                    <!-- end ngIf: cms_form_data.object.filter_merge_file_output -->
+                </form>
+            </div>
+            <div class="tab-pane fade" id="ghepNoiDung2" role="tabpanel" aria-labelledby="ghepNoiDung2-tab">
+                <form class="pt-3 form-horizontal ng-pristine ng-valid ng-valid-required" role="form" method="post"
+                    name="cms_form12" novalidate="">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">Danh sách nội dung:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 120px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" ng-required="true"
+                                ng-model="cms_form_data.object.filter_merge_file_input1" required="required"
+                                placeholder="Nhập danh sách nội dung..." id="danhsachnoidung1"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">Tùy chọn:</label>
+
+                        <div class="form-check-inline pl-3">
+                            <label class="form-check-label">
+                                <input type="radio" checked class="form-check-input" name="typeDanhSachNoiDung"
+                                    value="0">Nội dung chỉ có 1 dòng
+                            </label>
+                        </div>
+                        <div class="form-check-inline pl-3">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="typeDanhSachNoiDung" value="1">Nội
+                                dung có nhiều dòng (ngăn cách nhau bằng "|")
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-12 control-label ">Chuỗi thay thế:</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" ng-trim="false"
+                                ng-model="cms_form_data.object.cut_seperate" placeholder="VD: @random" value=""
+                                id="chuoiThayThe11" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">Danh sách thay thế:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 120px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" ng-required="true"
+                                ng-model="cms_form_data.object.filter_merge_file_input2" required="required"
+                                placeholder="Nhập danh sách thay thế..." id="danhsachthaythe1"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <span class="btn btn-warning btn_control_box btn-block " onclick="ghepNoiDung2()">Xử
+                                lý</span>
+                        </div>
+                    </div>
+                    <!-- ngIf: cms_form_data.object.filter_merge_file_output -->
+                    <div class="form-group ng-scope" ng-if="cms_form_data.object.filter_merge_file_output">
+                        <label class="col-sm-2 control-label ">Kết quả:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 120px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" ng-required="true"
+                                ng-model="cms_form_data.object.filter_merge_file_output" required="required"
+                                id="ketqua11"></textarea>
+                        </div>
+                    </div>
+                    <!-- end ngIf: cms_form_data.object.filter_merge_file_output -->
+                </form>
+            </div>
+            <div class="tab-pane fade" id="loctheouid" role="tabpanel">
+                <form class="pt-3 form-horizontal ng-pristine ng-valid ng-valid-required" role="form" method="post"
+                    name="cms_form12" novalidate="">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">Danh sách tài khoản:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 200px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" required="required"
+                                placeholder="Nhập danh sách tài khoản..." id="noidung12"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">Danh sách uid:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 200px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" required="required"
+                                placeholder="Nhập danh sách uid..." id="uid12"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <span class="btn btn-warning btn_control_box btn-block " onclick="locTaiKhoan()">Xử
+                                lý</span>
+                        </div>
+                    </div>
+                    <!-- ngIf: cms_form_data.object.filter_merge_file_output -->
+                    <div class="form-group ng-scope">
+                        <label class="col-sm-2 control-label ">Kết quả:</label>
+                        <div class="col-sm-12">
+                            <textarea style="height: 200px; white-space: pre; overflow-wrap: normal;"
+                                class="form-control ng-valid-required" required="required" id="ketqua12"></textarea>
+                        </div>
+                    </div>
+                    <!-- end ngIf: cms_form_data.object.filter_merge_file_output -->
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+    <script>
+        $(document).ready(function () {
+            toastr.options.timeOut = 1500; // 1.5s
+
+            String.prototype.trimEnd = function (kytu) {
+                var array = this.split(kytu);
+                for (var i = 0; i < array.length; i++) {
+                    if (array[i] == "") {
+                        array.splice(i, 1);
+                        i--;
+                    }
+                }
+                return array.join(kytu);
+            };
+
+            Array.prototype.locTrung = function () {
+                let unique = {};
+                this.forEach(function (i) {
+                    if (!unique[i]) {
+                        unique[i] = true;
+                    }
+                });
+                return Object.keys(unique);
+            };
+        });
+        function loctrungchuoi() {
+            var noidung = document.querySelector("#noidung4").value.trim();
+            var typeLocTrung = document.querySelector("[name='typeLocTrung']:checked").value;
+
+            //Check input
+            if (noidung.trim() == "") {
+                toastr.error('Vui lòng nhập "Nội dung"!');
+                return;
+            }
+
+            //thuc hien
+            var arr = noidung.split("\n");
+            var ketqua = [];
+
+            if (typeLocTrung == 0) {
+                ketqua = arr.locTrung();
+            } else {
+                let sorted_arr = arr.slice().sort();
+
+                for (let i = 0; i < sorted_arr.length - 1; i++) {
+                    if (sorted_arr[i + 1] == sorted_arr[i]) {
+                        ketqua.push(sorted_arr[i]);
+                    }
+                }
+                ketqua = ketqua.locTrung();
+
+                if (typeLocTrung == 2)
+                    ketqua = arr.filter(e => !ketqua.includes(e))
+            }
+
+            document.querySelector("#status4").innerText = "Kết quả: (" + ketqua.length + ")";
+            ketqua = ketqua.join("\n");
+            ketqua = ketqua.trimEnd("\n");
+            document.querySelector("#ketqua4").value = ketqua;
+        }
+
+        function ghepNoiDung() {
+            var noidung = document.querySelector("#noidung8").value.trim();
+            var typeLocTrung = document.querySelector("[name='typeDinhDang']:checked").value;
+
+            //Check input
+            if (noidung.trim() == "") {
+                toastr.error('Vui lòng nhập "Nội dung"!');
+                return;
+            }
+
+            //thuc hien
+            var arr = noidung.split("\n");
+            arr = arr.filter(e => e.trim() !== '');
+            var ketqua = '';
+
+            ketqua = arr.join("|");
+
+            if (typeLocTrung == 0) {
+                ketqua = '@[{' + ketqua + '}:]';
+            } else {
+                ketqua = '{' + ketqua + '}';
+            }
+
+            document.querySelector("#ketqua8").value = ketqua;
+        }
+        function thayTheChuoi() {
+            var noidung = document.querySelector("#noidung9").value.trim();
+            var chuoiCanThay = document.querySelector("#chuoiCanThay").value.trim().split('\n');
+            var chuoiThayThe = document.querySelector("#chuoiThayThe").value.trim();
+
+            //Check input
+            if (noidung.trim() == "") {
+                toastr.error('Vui lòng nhập "Nội dung"!');
+                return;
+            }
+
+            chuoiCanThay.forEach(element => {
+                noidung = noidung.replaceAll(element, chuoiThayThe);
+            });
+
+            document.querySelector("#ketqua9").value = noidung;
+        }
+        function catchuoi() {
+            var isLoaiTrungLap = document.querySelector("#isLoaiTrungLap1").checked;
+            var noidung = document.querySelector("#noidung1").value.trim();
+            var ngancach = document.querySelector("#ngancach1").value;
+            var batdau = document.querySelector("#batdau1").value;
+            var dencum = document.querySelector("#dencum1").value;
+
+            //Check input
+            if (noidung.trim() == "") {
+                toastr.error('Vui lòng nhập "Nội dung"!');
+                return;
+            }
+            if (ngancach.trim() == "") {
+                toastr.error('Vui lòng nhập ký tự "Ngăn cách"!');
+                return;
+            }
+            if (batdau.trim() == "") {
+                toastr.error('Vui lòng nhập vị trí "Bắt đầu"!');
+                return;
+            }
+            if (dencum.trim() == "") {
+                toastr.error('Vui lòng nhập "Đến cụm"!');
+                return;
+            }
+
+            //thuc hien
+            var ketqua = "";
+            noidung.split("\n").forEach((item) => {
+                var array = item.split(ngancach);
+                if (dencum <= array.length) {
+                    for (i = batdau - 1; i < dencum; i++) {
+                        ketqua += array[i] + ngancach;
+                    }
+                }
+
+                ketqua = ketqua.trimEnd(ngancach);
+                ketqua += "\n";
+            });
+
+            if (isLoaiTrungLap) {
+                ketqua = ketqua.split("\n");
+                ketqua = ketqua.locTrung();
+                ketqua = ketqua.join("\n");
+            }
+
+            ketqua = ketqua.trimEnd("\n");
+            document.querySelector("#ketqua1").value = ketqua;
+        }
+        function ghepchuoi() {
+            var isLoaiTrungLap = document.querySelector("#isLoaiTrungLap2").checked;
+            var noidung = document.querySelector("#noidung2").value.trim();
+            var ghepdau = document.querySelector("#ghepdau2").value;
+            var ghepcuoi = document.querySelector("#ghepcuoi2").value;
+
+            //Check input
+            if (noidung.trim() == "") {
+                toastr.error('Vui lòng nhập "Nội dung"!');
+                return;
+            }
+
+            //thuc hien
+            var ketqua = "";
+            noidung.split("\n").forEach((item) => {
+                ketqua += ghepdau + item + ghepcuoi + "\n";
+            });
+
+            if (isLoaiTrungLap) {
+                ketqua = ketqua.split("\n");
+                ketqua = ketqua.locTrung();
+                ketqua = ketqua.join("\n");
+            }
+
+            ketqua = ketqua.trimEnd("\n");
+            document.querySelector("#ketqua2").value = ketqua;
+        }
+        function ghepfile() {
+            var isLoaiTrungLap = document.querySelector("#isLoaiTrungLap3").checked;
+            var noidung1 = document.querySelector("#noidung31").value.trim().split('\n');
+            var noidung2 = document.querySelector("#noidung32").value.trim().split('\n');
+            var ngancach = document.querySelector("#ngancach3").value;
+
+            //thuc hien
+            var max = noidung1.length < noidung2.length ? noidung2.length : noidung1.length;
+
+            var ketqua = "";
+            var a = "",
+                b = "";
+            for (i = 0; i < max; i++) {
+                a = i < noidung1.length ? noidung1[i] : "";
+                b = i < noidung2.length ? noidung2[i] : "";
+                ketqua += a + ngancach + b + "\n";
+            }
+
+            if (isLoaiTrungLap) {
+                ketqua = ketqua.split("\n");
+                ketqua = ketqua.locTrung();
+                ketqua = ketqua.join("\n");
+            }
+
+            ketqua = ketqua.trimEnd("\n");
+            document.querySelector("#ketqua3").value = ketqua;
+        }
+        // function xuLyContent() {
+        //     var noiDung = document.querySelector("#noidung5").value.trim();
+        //     var tuKhoa = document.querySelector("#tukhoa5").value.trim().split('\n');
+
+        //     var arrTuKhoa = [];
+        //     var stt = 0;
+        //     tuKhoa.forEach(item => {
+        //         var arrCheck = item.replace('{','').replace('}','').split('|').filter(item => item.trim()!='');
+        //         arrCheck.forEach(check => {			
+        //             noiDung = noiDung.replaceAll(' '+check+' ', ` __${stt}__ `).replaceAll(' '+check+',', ` __${stt}__,`).replaceAll(' '+check+'.', ` __${stt}__.`)
+
+        //             noiDung = noiDung.startsWith(check+' ')?noiDung.replace(check+' ', `__${stt}__ `):noiDung;
+        //             noiDung = noiDung.startsWith(check+',')?noiDung.replace(check+',', `__${stt}__,`):noiDung;
+        //             noiDung = noiDung.startsWith(check+'.')?noiDung.replace(check+'.', `__${stt}__.`):noiDung;
+        //             noiDung = noiDung.endsWith(' '+check)?noiDung.replace(' '+check, ` __${stt}__`):noiDung;
+        //         })
+        //         arrTuKhoa[`__${stt}__`] = item;
+        //         stt++;
+        //     })
+
+        //     for (var key in arrTuKhoa) {
+        //         noiDung = noiDung.replaceAll(key, arrTuKhoa[key])
+        //     }
+
+        //     document.querySelector("#ketqua5").value = noiDung;
+        // }
+
+        function xuLyContent() {
+            var noiDung = document.querySelector("#noidung5").value.trim();
+            var tuKhoa = document.querySelector("#tukhoa5").value.trim().split('\n');
+
+            var arrTuKhoa = [];
+            var stt = 0;
+
+            var sCheck = ['  ', ' ,', ' .', '\n\n', '\n ', '\n,', '\n.', ' \n'];
+            tuKhoa.forEach(item => {
+                var arrCheck = item.replace('{', '').replace('}', '').split('|').filter(item => item.trim() != '');
+                arrCheck.forEach(check => {
+
+                    sCheck.forEach(s => {
+                        noiDung = noiDung.replaceAll(s[0] + check + s[1], s[0] + `__${stt}__` + s[1]);
+                    })
+
+                    noiDung = noiDung.startsWith(check + ' ') ? noiDung.replace(check + ' ', `__${stt}__ `) : noiDung;
+                    noiDung = noiDung.startsWith(check + ',') ? noiDung.replace(check + ',', `__${stt}__,`) : noiDung;
+                    noiDung = noiDung.startsWith(check + '.') ? noiDung.replace(check + '.', `__${stt}__.`) : noiDung;
+                    noiDung = noiDung.endsWith(' ' + check) ? noiDung.replace(' ' + check, ` __${stt}__`) : noiDung;
+                })
+                arrTuKhoa[`__${stt}__`] = item;
+                stt++;
+            })
+
+            for (var key in arrTuKhoa) {
+                noiDung = noiDung.replaceAll(key, arrTuKhoa[key])
+            }
+
+            document.querySelector("#ketqua5").value = noiDung;
+        }
+
+
+        String.prototype.replaceIndex = function (start, end, text) {
+            if (start < 0) {
+                start += this.length;
+                if (start < 0)
+                    start = 0;
+            }
+            return this.slice(0, start) + (text || "") + this.slice(end + 1);
+        }
+
+        String.prototype.indexOfAny = function (arr, index) {
+            var output = -1;
+            for (const value of arr) {
+                output = this.indexOf(value, index);
+                if (output != -1)
+                    break;
+            }
+            return output;
+        }
+
+        String.prototype.randomText = function (separator) {
+            var arr = this.split(separator);
+            var output = arr.length == 1 ? this + '' : arr[Math.floor(Math.random() * arr.length)]
+            return output;
+        }
+
+        function spinText(text) {
+            var i, j, e = -1;
+            var curls = ['{', '}'];
+            text += '~';
+            var parts = [];
+            do {
+                i = e;
+                e = -1;
+                while ((i = text.indexOf('{', i + 1)) != -1) {
+                    j = i;
+                    while ((j = text.indexOfAny(curls, j + 1)) != -1 && text[j] != '}') {
+                        if (e == -1) e = i;
+                        i = j;
+                    }
+                    if (j != -1) {
+                        parts = text.substr(i + 1, (j - 1) - (i + 1 - 1));
+                        text = text.replaceIndex(i, j, parts.randomText('|'));
+                    }
+                }
+            }
+            while (e-- != -1);
+
+            return text.slice(0, text.length - 1);
+        }
+
+        function testSpin() {
+            var noiDung = document.querySelector("#noidung6").value.trim();
+
+            document.querySelector("#ketqua6").value = spinText(noiDung);
+        }
+
+        function tachTuKhoa() {
+            var noiDung = document.querySelector("#noidung7").value.trim();
+            const regexp = new RegExp('{(.*?)}', 'g');
+            const matches = noiDung.matchAll(regexp);
+            var arr = []
+            for (const match of matches) {
+                arr.push(match[0]);
+            }
+            arr = arr.filter((value, index, self) => self.indexOf(value) === index);
+            arr.sort((a, b) => a.toLowerCase() > b.toLowerCase() && 1 || -1)
+            document.querySelector("#countKetQua7").innerText = arr.length;
+            document.querySelector("#ketqua7").value = arr.join('\n');
+        }
+        function GetIdPostFromLink(link) {
+            var id = "";
+            if (!link.endsWith("/"))
+                link += "/";
+
+            var lstPatter = [
+                "story_fbid=(.*?)&",
+                "permalink/(.*?)/",
+                "v=(.*?)&",
+                "post_id=(.*?)&",
+                "v=(.*?)/",
+                "videos/(.*?)/",
+                "posts/(.*?)/",
+                "posts/(.*?)\\?",
+                "view_tray_pagination/(.*?)/",
+                "fbid=(.*?)&",
+            ];
+
+            for (var i = 0; i < lstPatter.length; i++) {
+                id = link.match(new RegExp(lstPatter[i].replaceAll("(.*?)", "\\d+")));
+                if (id != null) {
+                    id = id[0];
+                    id = id.replaceAll(lstPatter[i].split("(.*?)")[0], "");
+                    id = id.replaceAll(lstPatter[i].split("(.*?)")[1], "");
+                    id = id.replaceAll("?", "");
+                    break;
+                }
+            }
+
+            if (id == "" || id == null) {
+                if (link.includes("photos")) {
+                    id = link.match(new RegExp("/\\d+/"))[0];
+                    id = id.replaceAll("/", "");
+                }
+            }
+            return id;
+        }
+        function layIdTuLink() {
+            var noiDung = document.querySelector("#noidung10").value.trim();
+            var arr = noiDung.split("\n");
+            var ketqua = [];
+
+            arr.forEach(link => {
+                var id = GetIdPostFromLink(link);
+                if (id == null)
+                    id = link;
+                ketqua.push(id);
+            });
+
+            document.querySelector("#ketqua10").value = ketqua.join('\n');
+        }
+        function ghepNoiDung2() {
+            var danhsachnoidung = document.querySelector("#danhsachnoidung1").value.trim();
+            var chuoiThayThe11 = document.querySelector("#chuoiThayThe11").value.trim();
+            var danhsachthaythe = document.querySelector("#danhsachthaythe1").value.trim().split('\n');
+            var typeDanhSachNoiDung = document.querySelector('[name="typeDanhSachNoiDung"]:checked').value;
+            if (typeDanhSachNoiDung == 0)
+                danhsachnoidung = danhsachnoidung.split('\n');
+            else
+                danhsachnoidung = danhsachnoidung.split('\n|\n');
+            //thuc hien
+            var ketqua = [];
+            do {
+                danhsachnoidung.forEach(e => {
+                    if (danhsachthaythe.length == 0)
+                        return;
+                    if (e.includes(chuoiThayThe11)) {
+                        ketqua.push(e.replaceAll(chuoiThayThe11, danhsachthaythe.shift()));
+                    } else {
+                        ketqua.push(e);
+                    }
+                });
+            } while (danhsachthaythe.length > 0);
+
+            if (typeDanhSachNoiDung == 0)
+                ketqua = ketqua.join("\n");
+            else
+                ketqua = ketqua.join("\n|\n");
+            document.querySelector("#ketqua11").value = ketqua;
+        }
+        function locTaiKhoan() {
+            var lstTaiKhoan = document.querySelector("#noidung12").value.trim().split("\n");
+            lstTaiKhoan = lstTaiKhoan.filter(e => e.trim() !== '');
+
+            var lstUid = document.querySelector("#uid12").value.trim().split("\n");
+            lstUid = lstUid.filter(e => e.trim() !== '');
+
+            //thuc hien
+            var ketqua = [];
+            for (const item of lstTaiKhoan) {
+                if (lstUid.includes(item.split('|')[0]))
+                    ketqua.push(item);
+            }
+
+            ketqua = ketqua.join("\n");
+            document.querySelector("#ketqua12").value = ketqua;
+        }
+    </script>
+</body>
+
+</html>
